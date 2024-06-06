@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Home | Super Hair Braiding{% endblock title %}
+
+{% block body %}
+
+<div id="header-background" style="background-image: url('{{ header.background_image.url }}');">
+    <div class="intro center-vertically">
+       <div class="container">
+          <div class="row">
+             <div class="col-md-12">
+                <div class="header-content text-left">
+                   <h1 class="margin-auto">
+                    {{ header.title|slice:18}}<br>{{header.title|slice:"18:35"}}
+                   </h1>
+                   <h3>{{header.subtitle}}</h3>                         
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+
+<section class="mmg-service-section">
+ <div class="container-fluid">
+    <div class="row">
+        {% for service in services %}
+       <div class="col-md-6 col-sm-6 col-xs-12">
+          <img class="inner-img" src="{{ service.image.url }}" alt="">
+          <div class="wow-fgcaption">
+              <h2>{{service.title}} </h2>
+              <p>{{service.description}}</p>
+           </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</section>
+
+<section id="team-section">
+ <div id="parallax-background-team">
+    <div class="container">
+       <div class="row">
+          <div class="titlearea center">
+             <h1>What’s Happening</h1>
+          </div>                 
+          <div class="space50"></div>
+          {% for item in whatshappening %}
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="single-team">
+                    <div class="image">
+                       <img class="img-responsive" src="{{item.image.url}}" alt="">
+                    </div>
+                    <div class="information">
+                       <h3>{{item.title}}</h3>
+                       <h5>{{item.description}}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+         </div>
+    </div>
+ </div>
+</section>
+
+<div id="parallax-background">
+ <div class="intro center-vertically">
+    <div class="container-fluid">
+       <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+             <div class="header-content-white text-center">
+                <h1 class="margin-auto">Connect With Us</h1>
+                <ul class="social-icons">
+                    <li class="social-icon-facebook"><a target="_blank" href="#" aria-label="facebook"><span class="fa fa-facebook" aria-hidden="true"></span></a></li>
+                    <li class="social-icon-twitter"><a target="_blank" href="#" aria-label="twitter"><span class="fa fa-twitter" aria-hidden="true"></span></a></li>
+                    <li class="social-icon-linkedin"><a target="_blank" href="#" aria-label="LinkedIn"><span class="fa fa-linkedin" aria-hidden="true"></span></a></li>
+                    <li class="social-icon-instagram"><a target="_blank" href="#" aria-label="Instagram"><span class="fa fa-instagram" aria-hidden="true"></span></a></li>
+                 </ul>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Book Now | Super Hair Braiding{% endblock title %}
+
+{% block body %}
+
+		<div class="inner-page-overlay-wrapper" style="background-image: url('{{ images.image.url }}');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <h2>{{images.title}}</h2>                        
+						</div>
+                    </div>
+                </div>
+            </div>
+		</div>	
+		
+		<div class="container book-form-panel">
+		   <div class="row row-30 align-items-md-center justify-content-center">
+			  <div class="col-sm-12 col-md-12 col-lg-12 text-left">
+				 <div class="heading-1 font-weight-light"><span>{{contents.title}}</span></div>
+				 <p>{{contents.description|safe}}</p>
+
+				 {% if messages %}
+						<div>
+							{% for message in messages %}
+								<div class="alert alert-{{ message.tags }}">
+									{{ message }}
+								</div>
+							{% endfor %}
+						</div>
+                 {% endif %}
+				 
+				<div class="row row-sm-bottom row-20 book-form">
+					<form action="{% url "book-it" %}" method="POST" id="form" class="needs-validation" novalidate>
+						{% csrf_token %}
+
+						
+						<div class="col-md-6">
+							<div class="form-wrap">
+								<label class="form-label" for="firstname">First Name:</label>
+								<input type="text" name="firstname" id="firstname" placeholder="Enter your first name" class="form-input" required>
+								
+							</div>
+						</div>
+					   
+						<div class="col-md-6">
+							<div class="form-wrap">
+								<label class="form-label" for="lastname">Last Name</label>
+								<input type="text" name="lastname" placeholder="Enter your last name" id="lastname" class="form-input" required>
+								
+							</div>
+						</div>
+						<div class="col-md-6">				  
+							<div class="form-wrap">
+								<label class="form-label" for="telephonenumber">Telephone Number</label>
+								<input type="text" name="telephonenumber" placeholder="Enter your Number" id="telephonenumber" class="form-input" required>
+								
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-wrap">
+								<label class="form-label" for="email">Email</label>
+								<input type="email" name="email" id="email" placeholder="Enter your email" class="form-input" required>
+								
+								
+							</div>	
+						</div>
+						
+						<div class="col-md-6">				  
+							<div class="form-wrap">
+								<label class="form-label" for="styleneeded">Style Needed</label>
+								<input type="text" name="styleneeded" id="styleneeded"  placeholder="Enter the style" class="form-input" required>
+								
+							</div>
+						</div>
+						
+						<div class="col-md-6">				  
+							<div class="form-wrap">
+								<label class="form-label" for="date">Date</label>
+								<input type="text" name="date" id="date"  placeholder="YYYY-MM-DD" class="form-input" required>
+								
+							</div>
+						</div>
+						
+						<div class="col-md-6">				  
+							<div class="form-wrap">
+								<label class="form-label" for="time">Time</label>
+								<input type="text" name="time" id="time" placeholder="00:00" class="form-input" required>
+								
+							</div>
+						</div>
+						
+						<div class="col-md-6">				  
+							<div class="form-wrap">
+								<label class="form-label" for="streetaddress">Street Address</label>
+								<input type="text" name="streetaddress"  placeholder="Enter your address" id="streetaddress" class="form-input" required>
+								
+							</div>
+						</div>
+						
+ 
+						<div class="col-md-6">
+						  <div class="form-wrap">
+							 <label class="form-label rd-input-label" for="contact-2-citystatezipcode">Do you like this website?</label>
+							 <div class="radio_btn">
+								<input type="radio" name="likeit" value="Yes" class="radio-custom"><span class="radio-custom-dummy"></span> Yes <input type="radio" name="likeit" value="No" class="ml-2 radio-custom"><span class="radio-custom-dummy"></span> No <input type="radio" name="likeit" value="Not sure" class="ml-2 radio-custom"><span class="radio-custom-dummy"></span> Not sure
+							 </div>
+						  </div>
+					   </div>
+					   
+						<div class="col-md-6">
+							<div class="form-wrap">
+								<label class="form-label" for="findus">How did you find us?</label>
+								 <select id="findus" name="findus" class="form-input" required>
+									<option selected="selected">-- Please select --</option>
+									<option>Google</option>
+									<option>Yahoo</option>
+									<option>Link from a website</option>
+									<option>Word of mouth</option>
+									<option>Other</option>
+								 </select>
+							</div>
+					   </div>
+
+					   <div class="col-md-12">				  
+							<div class="form-wrap">
+								<label class="form-label" for="comments">Your Comments</label>	
+								<textarea name="comments" id="comments" class="form-input" required></textarea>
+							</div>
+						</div>
+						
+					   <div class="col-md-12">
+						  <div class="form-wrap">
+							<input type="submit" value="send" class="btn-sbmt-frm">
+							
+						  </div>
+					   </div>
+					</form>
+				</div>
+			  </div>
+		   </div>
+		</div>
+
+{% endblock body %}

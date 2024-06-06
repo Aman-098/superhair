@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} Gallery | Super Hair BrAIDING {% endblock title %}
+
+{% block body %}
+
+		<div class="inner-page-overlay-wrapper" style="background-image: url('{{ contents.bg_image.url }}');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <h2>{{contents.title}}</h2>                        
+						      </div>
+                    </div>
+                </div>
+            </div>
+		</div>	
+		
+		<div class="container gallery-wrpapper-content">
+         {% for item in images %}
+            <div class="col-md-3 col-sm-4 col-xs-12">
+               <img src="{{item.item_image.url}}" alt="" srcset="">
+                  
+            </div>
+         {% endfor %}
+      
+
+      </div>
+
+{% endblock body %}

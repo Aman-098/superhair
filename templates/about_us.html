@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About | Super Hair Braiding{% endblock title %}
+
+
+{% block body %}
+
+		<div class="inner-page-overlay-wrapper" style="background-image: url('{{ background.background_image.url }}');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <h2>{{background.title}}</h2>                     
+						</div>
+                    </div>
+                </div>
+            </div>
+		</div>	
+		
+		
+		<div class="space50"></div>
+		
+		<div class="container container page-wrpapper-content">
+			<div class="col-md-5 col-sm-12 col-xs-12">
+				<div class="about-page-gallery">
+					{% for item in images %}
+					<img src="{{item.image.url}}" alt="">
+					{% endfor %}
+				</div>
+			</div>
+			<div class="col-md-7 col-sm-12 col-xs-12">
+				<h1>{{content.title}}</h1>
+				<div class="portfolio-description">	
+					<h2>{{content.subtitle}}</h2>
+					<p>{{content.description|safe}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="space30"></div>
+
+{% endblock body %}

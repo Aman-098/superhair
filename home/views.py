@@ -5,6 +5,8 @@ from services.models import *
 from book.models import *
 from gallery.models import *
 from contact.models import *
+import re
+from datetime import datetime
 
 from django.contrib import messages
 
@@ -57,12 +59,10 @@ def book_it(request):
     }
 
     if request.method == "POST":
-
         errors = []
 
-
         first_name = request.POST.get('firstname')
-        last_name = request.POST.get('lastname')  # Corrected typo
+        last_name = request.POST.get('lastname')
         telephone_number = request.POST.get('telephonenumber')
         email = request.POST.get('email')
         style_needed = request.POST.get('styleneeded')
@@ -80,12 +80,23 @@ def book_it(request):
             errors.append('Last name is required.')
         if not telephone_number:
             errors.append('Telephone number is required.')
+        elif not re.match(r'^\d{10,20}$', telephone_number):
+            errors.append('Telephone number must be 10 to 20 digits and contain only numbers.')
         if not email:
             errors.append('Email is required.')
+        elif not re.match(r'^[\w\.-]+@[\w\.-]+\.\w+$', email):
+            errors.append('Enter a valid email address.')
         if not style_needed:
             errors.append('Style needed is required.')
         if not appointment_date:
             errors.append('Appointment date is required.')
+        else:
+            try:
+                appointment_date_parsed = datetime.strptime(appointment_date, '%Y-%m-%d').date()
+                if appointment_date_parsed < datetime.now().date():
+                    errors.append('Appointment date cannot be in the past.')
+            except ValueError:
+                errors.append('Enter a valid date in YYYY-MM-DD format.')
         if not appointment_time:
             errors.append('Appointment time is required.')
         if not street_address:
@@ -97,14 +108,15 @@ def book_it(request):
         if not comments:
             errors.append('Comments are required.')
 
-        # If there are errors, show them
+         # If there are errors, show them
         if errors:
-            for error in errors:
-                messages.error(request, error)
+            if all(field == '' for field in [first_name, last_name, telephone_number, email, style_needed, appointment_date, appointment_time, street_address, like_website, find_us, comments]):
+                messages.error(request, 'Please fill the form.')
+            else:
+                for error in errors:
+                    messages.error(request, error)
             return render(request, 'book_it.html')
-
-
-        
+     
          # Save to database
         appointment = Book_Appointment(
             first_name=first_name,
